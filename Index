@@ -1,0 +1,77 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Parcel Match Countdown</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+      background-image: url("four-blokes.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.55);
+      padding: 25px 35px;
+      border-radius: 14px;
+      max-width: 90%;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+      font-size: 30px;
+    }
+
+    #countdown {
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="overlay">
+    <h1>Parcel Match Kick-off</h1>
+    <div id="countdown"></div>
+  </div>
+
+  <script>
+    const target = new Date();
+    target.setHours(21, 0, 0, 0);
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = target.getTime() - now;
+
+      if (distance <= 0) {
+        document.getElementById("countdown").innerHTML = "It's parcel time 🍻📦";
+        clearInterval(timer);
+        return;
+      }
+
+      const hours = Math.floor(distance / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
